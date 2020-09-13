@@ -1,0 +1,39 @@
+<!doctype html>
+<html>
+    <head>
+        <title>
+            The Todo App
+        </title>
+        <link href="style.css" type="text/css" rel="stylesheet">
+
+    </head>
+    <body>
+        <header>The Todo App</header>
+        <main>
+            <div id="task-add">
+                <form id="task" >
+                    <label for="task-text">Task:</label><br>
+                    <textarea id="task-text" rows="2" cols="18"></textarea>
+                    <button type="button" id="taskCreateBtn" onclick="createTask()">CREATE</button>
+                </form>
+            </div>
+            <button type="button" id="del-btn" onclick="deleteTasks()">DELETE</button>
+            <section id="tasks-section">
+                <ul id="tasks-list"></ul>
+            </section>
+        </main>
+
+        <template>
+            <div>
+                <span class="todoSpan">Todo: </span>
+                <input type="checkbox">
+                <span class="taskText"></span>
+                <hr>
+            </div>
+        </template>
+        
+        <script src="todo.js" defer></script>
+    </body>
+
+
+</html>

@@ -1,0 +1,42 @@
+* {
+    background-color: blanchedalmond;
+}
+
+.todoSpan {
+    /*text-transform: uppercase;*/
+    font-style: "Times New Roman", serif;
+    font-weight: bold;
+    opacity: 0.8;
+    color: rgb(41, 23, 0)
+}
+
+header {
+    margin: auto;
+    text-align: center;
+    height: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(245, 218, 177);
+    color: teal;
+    font-weight: 900;
+    font-style: "Times New Roman", serif;
+    font-size: 3em;
+}
+
+button {
+    font-style: "Times New Roman", serif;
+    transition-duration: 0.2s;
+    border: 0px solid teal;
+    background-color: teal;
+    color: white;
+    padding: 8px;
+    margin: 4px;
+    box-sizing: border-box;
+}
+  
+button:hover {
+    padding: 12px;
+    /*border: 4px solid teal;*/
+    margin: 0px;
+}
