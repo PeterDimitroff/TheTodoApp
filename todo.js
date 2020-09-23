@@ -1,6 +1,23 @@
+class Task {
+    text;
+    id;
+    static nextId = 1;
+    constructor(text) {
+        this.text = text
+        this.id = Task.nextId
+        Task.nextId++
+    }
+};
+
+const taskList = document.getElementById("tasks-list")
+let tasks = [new Task('squeeze tomato juice'),
+            new Task('brew wodka'),
+            new Task('harvest black pepper'),
+            new Task('stir a Bloody Spaska up'),
+            new Task('get shrekd')]
+
 function initListeners() {
     var input = document.getElementById("task-text");
-
     // Execute a function when the user releases a key on the keyboard
     input.addEventListener("keyup", function(event) {
         // Number 13 is the "Enter" key on the keyboard
@@ -21,30 +38,37 @@ function createTask() {
         return
     }
     
-    let taskList = document.getElementById("tasks-list")
-    let task = document.createElement("li")
-    let todoSpan = document.createElement("span")
-
-    task.setAttribute("class", "todoTask")
-    task.appendChild(document.createElement('input')).setAttribute("type", "checkbox")
-    todoSpan.setAttribute("class", "todoSpan")
-    todoSpan.appendChild(document.createTextNode("Todo: "))
-
-    task.appendChild(todoSpan)
-    task.appendChild(document.createTextNode(taskText))
-    task.appendChild(document.createElement("hr"))
-    taskList.appendChild(task)
+    tasks.push(new Task(taskText))
     textArea.value = ""
+    render()
 }
 
 function deleteTasks() {
-    const tasks = document.querySelectorAll("#tasks-list li")
-    //const tasks = document.querySelectorAll(".todoTask")
-    for(let li of tasks) {
+    const taskElements = document.querySelectorAll("#tasks-list li")
+    
+    for(let li of taskElements) {
         const isTaskDone = li.querySelector("input").checked
-        console.log(isTaskDone)
-        isTaskDone && li.remove()
+        if(isTaskDone) {
+            tasks = tasks.filter(item => item.id != li.dataset.id)
+        }
     }
+    render()
 }
 
 initListeners()
+
+function render() {
+    taskList.innerHTML = ''
+    tasks.forEach(task => {
+        let li = document.createElement("li")
+        li.setAttribute("class", "todoTask")
+        li.appendChild(document.createElement('input')).setAttribute("type", "checkbox")
+        li.appendChild(document.createTextNode(task.text))
+        li.appendChild(document.createElement("hr"))
+        li.dataset.id = task.id
+        taskList.appendChild(li)
+    });
+}
+
+render()
+
