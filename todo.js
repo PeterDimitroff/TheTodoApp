@@ -17,7 +17,7 @@ let tasks = [new Task('Pick some apples'),
             new Task('Bake apple pie'),
             new Task('Fix car light'),
             new Task('Pick Jimmy up from school'),
-            new Task('Help Jimmy his homework')]
+            new Task('Help Jimmy with his homework')]
 
 function initListeners() {
     var input = document.getElementById("task-text");
