@@ -5,6 +5,7 @@
             The Todo App
         </title>
         <link href="style.css" type="text/css" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     </head>
     <body>
@@ -12,12 +13,12 @@
         <main>
             <div id="task-add">
                 <form id="task" >
-                    <label for="task-text">Task:</label><br>
-                    <textarea id="task-text" rows="2" cols="18"></textarea>
-                    <button type="button" id="taskCreateBtn" onclick="createTask()">CREATE</button>
+                    <label for="task-text">Task:</label>
+                    <input type="text" id="task-text">
+                    <button type="button" id="taskCreateBtn" onclick="createTask()">Create</button>
                 </form>
             </div>
-            <button type="button" id="del-btn" onclick="deleteTasks()">DELETE</button>
+            <button type="button" id="del-btn" onclick="deleteTasks()">Delete selected</button>
             <section id="tasks-section">
                 <ul id="tasks-list"></ul>
             </section>

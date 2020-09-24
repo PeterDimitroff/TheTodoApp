@@ -1,13 +1,6 @@
 * {
     background-color: blanchedalmond;
-}
-
-.todoSpan {
-    /*text-transform: uppercase;*/
-    font-style: "Times New Roman", serif;
-    font-weight: bold;
-    opacity: 0.8;
-    color: rgb(41, 23, 0)
+    font-family: 'Inconsolata', monospace;
 }
 
 header {
@@ -20,12 +13,15 @@ header {
     background-color: rgb(243, 202, 139);
     color: teal;
     font-weight: 900;
-    font-style: "Times New Roman", serif;
+    font-family: 'Inconsolata', monospace;
+    letter-spacing: 0.01em;
     font-size: 3em;
 }
 
 button {
-    font-style: "Times New Roman", serif;
+    font-family: 'Inconsolata', monospace;
+    font-weight: 400;
+    letter-spacing: 0.05em;
     transition-duration: 0.2s;
     border: 0px solid teal;
     background-color: teal;
