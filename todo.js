@@ -1,20 +1,23 @@
 class Task {
     text;
     id;
+    dateCreated;
     static nextId = 1;
     constructor(text) {
         this.text = text
         this.id = Task.nextId
+        let now = new Date(Date.now())
+        this.dateCreated = now.getFullYear() + '-' + now.getMonth() + '-' + now.getDate()
         Task.nextId++
     }
 };
 
 const taskList = document.getElementById("tasks-list")
-let tasks = [new Task('squeeze tomato juice'),
-            new Task('brew wodka'),
-            new Task('harvest black pepper'),
-            new Task('stir a Bloody Spaska up'),
-            new Task('get shrekd')]
+let tasks = [new Task('Pick some apples'),
+            new Task('Bake apple pie'),
+            new Task('Fix car light'),
+            new Task('Pick Jimmy up from school'),
+            new Task('Help Jimmy his homework')]
 
 function initListeners() {
     var input = document.getElementById("task-text");
@@ -71,4 +74,3 @@ function render() {
 }
 
 render()
-
