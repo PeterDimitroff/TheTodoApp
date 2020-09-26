@@ -43,7 +43,7 @@ function createTask() {
     saveAndRender()
 }
 
-function deleteTasks() {
+function deleteSelectedTasks() {
     const taskElements = document.querySelectorAll("#tasks-list li")
     
     for(let li of taskElements) {
@@ -52,6 +52,11 @@ function deleteTasks() {
             tasks = tasks.filter(item => item.id != li.dataset.id)
         }
     }
+    saveAndRender()
+}
+
+function deleteAllTasks() {
+    tasks = []
     saveAndRender()
 }
 
