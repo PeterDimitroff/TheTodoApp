@@ -12,13 +12,6 @@ class Task {
     }
 };
 
-const taskList = document.getElementById("tasks-list")
-let tasks = [new Task('Make a TODO app'),
-            new Task('<h1>Test App for vulnerabilities</h1>'),
-            new Task('Commit to prod on Friday'),
-            new Task('Pick Jimmy up from school'),
-            new Task('Play ball with Jimmy')]
-
 function initListeners() {
     var input = document.getElementById("task-text");
     // Execute a function when the user releases a key on the keyboard
@@ -42,7 +35,7 @@ function createTask() {
     
     tasks.push(new Task(taskText))
     textArea.value = ""
-    render()
+    saveAndRender()
 }
 
 function deleteTasks() {
@@ -54,10 +47,30 @@ function deleteTasks() {
             tasks = tasks.filter(item => item.id != li.dataset.id)
         }
     }
+    saveAndRender()
+}
+
+function saveTasks() {
+    localStorage.setItem(LOCAL_STORAGE_TASKS_KEY, JSON.stringify(tasks))
+    tasks.length === 0 && localStorage.removeItem(LOCAL_STORAGE_TASKS_KEY)
+}
+
+function saveAndRender() {
+    saveTasks()
     render()
 }
 
 initListeners()
+
+const taskList = document.getElementById("tasks-list")
+const LOCAL_STORAGE_TASKS_KEY = 'thetodoapp.tasks'
+// provide initial tasks for demonstration purposes
+let tasks = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TASKS_KEY)) ||
+            [new Task('Make a TODO app'),
+            new Task('<h1>Test App for vulnerabilities</h1>'),
+            new Task('Commit to prod on Friday'),
+            new Task('Pick Jimmy up from school'),
+            new Task('Play ball with Jimmy')]
 
 function render() {
     taskList.innerHTML = ''
