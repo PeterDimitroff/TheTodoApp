@@ -18,6 +18,13 @@ header {
     font-size: 3em;
 }
 
+#subheader {
+    font-size: 0.7em;
+    letter-spacing: 0.05em;
+    font-weight: 500;
+    display: none;
+}
+
 button {
     font-family: 'Inconsolata', monospace;
     font-weight: 400;

@@ -10,10 +10,15 @@
     </head>
     <body>
         <header>The Todo App</header>
+        <div id="subheader">
+            <hr>
+            <span>You can close and reopen me and I'll remember your tasks</span>
+            <hr>
+        </div>
         <main>
             <div id="task-add">
                 <form id="task-form" >
-                    <label for="task-text">Task:</label>
+                    <label for="task-text">New Task:</label>
                     <input type="text" id="task-text">
                     <button type="button" id="taskCreateBtn" onclick="createTask()">Create</button>
                 </form>

@@ -70,12 +70,15 @@ initListeners()
 const taskList = document.getElementById("tasks-list")
 const LOCAL_STORAGE_TASKS_KEY = 'thetodoapp.tasks'
 // provide initial tasks for demonstration purposes
-let tasks = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TASKS_KEY)) ||
-            [new Task('Make a TODO app'),
-            new Task('<h1>Test App for vulnerabilities</h1>'),
-            new Task('Commit to prod on Friday'),
-            new Task('Pick Jimmy up from school'),
-            new Task('Play ball with Jimmy')]
+let tasks = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TASKS_KEY)) 
+if(tasks === null) {
+    tasks = [new Task('Make a TODO app'),
+    new Task('<h1>Test App for vulnerabilities</h1>'),
+    new Task('Commit to prod on Friday'),
+    new Task('Pick Jimmy up from school'),
+    new Task('Play ball with Jimmy')]
+    document.getElementById('subheader').style.display = 'initial'
+}
 
 function render() {
     taskList.innerHTML = ''
