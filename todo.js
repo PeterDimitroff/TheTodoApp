@@ -13,11 +13,11 @@ class Task {
 };
 
 const taskList = document.getElementById("tasks-list")
-let tasks = [new Task('Pick some apples'),
-            new Task('Bake apple pie'),
-            new Task('Fix car light'),
+let tasks = [new Task('Make a TODO app'),
+            new Task('<h1>Test App for vulnerabilities</h1>'),
+            new Task('Commit to prod on Friday'),
             new Task('Pick Jimmy up from school'),
-            new Task('Help Jimmy with his homework')]
+            new Task('Play ball with Jimmy')]
 
 function initListeners() {
     var input = document.getElementById("task-text");
@@ -31,7 +31,6 @@ function initListeners() {
             document.getElementById("taskCreateBtn").click();
         }
     });
-
 }
 
 function createTask() {
