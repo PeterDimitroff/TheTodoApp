@@ -3,11 +3,15 @@ class Task {
     id;
     dateCreated;
     static nextId = 1;
-    constructor(text) {
+    constructor(text, dateCreated='') {
         this.text = text
         this.id = Task.nextId
-        let now = new Date(Date.now())
-        this.dateCreated = now.getFullYear() + '-' + now.getMonth() + '-' + now.getDate()
+        if(dateCreated === '') {
+            let now = new Date(Date.now())
+            this.dateCreated = now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate()
+        } else {
+            this.dateCreated = dateCreated
+        }
         Task.nextId++
     }
 };
@@ -40,11 +44,12 @@ function createTask() {
     
     tasks.push(new Task(taskText))
     textArea.value = ""
+    document.getElementById('subheader').style.display = 'none'
     saveAndRender()
 }
 
 function deleteSelectedTasks() {
-    const taskElements = document.querySelectorAll("#tasks-list li")
+    const taskElements = document.querySelectorAll(".tasks-list li")
     
     for(let li of taskElements) {
         const isTaskDone = li.querySelector("input").checked
@@ -70,23 +75,31 @@ function saveAndRender() {
     render()
 }
 
-initListeners()
-
-const taskList = document.getElementById("tasks-list")
-const LOCAL_STORAGE_TASKS_KEY = 'thetodoapp.tasks'
-// provide initial tasks for demonstration purposes
-let tasks = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TASKS_KEY)) 
-if(tasks === null) {
-    tasks = [new Task('Make a TODO app'),
-    new Task('<h1>Test App for vulnerabilities</h1>'),
-    new Task('Commit to prod on Friday'),
-    new Task('Pick Jimmy up from school'),
-    new Task('Play ball with Jimmy')]
-    document.getElementById('subheader').style.display = 'initial'
+function getCardByDate(date) {
+    for(card in cards) {
+        if(card === date) {
+            return cards[card]
+        }
+    }
+    let newCard = document.createElement('div')
+    newCard.setAttribute('class', 'card')
+    let cardHeader = document.createElement('h4')
+    cardHeader.innerText = date
+    cardHeader.setAttribute('class', 'card-header')
+    newCard.append(cardHeader)
+    let ul = document.createElement("ul")
+    ul.setAttribute('class', 'tasks-list')
+    newCard.appendChild(ul)
+    cards[date] = newCard
+    return newCard
 }
 
 function render() {
+    newRender()
+    return;
+    
     taskList.innerHTML = ''
+
     tasks.forEach(task => {
         let li = document.createElement("li")
         li.setAttribute("class", "todoTask")
@@ -98,4 +111,40 @@ function render() {
     });
 }
 
+function newRender() {
+    taskGridContainer.innerHTML = ''
+    cards = {}
+
+    tasks.forEach(task => {
+        let card = getCardByDate(task.dateCreated)
+        let tasksList = card.childNodes[1]
+        let li = document.createElement("li")
+        li.setAttribute("class", "todoTask")
+        li.appendChild(document.createElement('input')).setAttribute("type", "checkbox")
+        li.appendChild(document.createTextNode(task.text))
+        li.appendChild(document.createElement("hr"))
+        li.dataset.id = task.id
+        tasksList.appendChild(li)
+    });
+    for(card in cards) {
+        taskGridContainer.appendChild(cards[card])
+    }
+}
+
+const LOCAL_STORAGE_TASKS_KEY = 'thetodoapp.tasks'
+const taskList = document.getElementById("tasks-list")
+const taskGridContainer = document.getElementById('tasks-grid-container')
+var cards = {}
+// provide initial tasks for demonstration purposes
+var tasks = JSON.parse(localStorage.getItem(LOCAL_STORAGE_TASKS_KEY))
+if(tasks === null) {
+    tasks = [new Task('Make a TODO app', '2020-9-11'),
+    new Task('<h1>Test App for vulnerabilities</h1>', '2020-9-11'),
+    new Task('Commit to prod on Friday', '2020-9-11'),
+    new Task('Pick Jimmy up from school', '2020-9-11'),
+    new Task('Play ball with Jimmy', '2020-9-12')]
+    document.getElementById('subheader').style.display = 'initial'
+}
+
+initListeners()
 render()
